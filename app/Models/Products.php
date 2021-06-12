@@ -15,4 +15,9 @@ class Products extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function category()
+    {
+        return $this->hasOne(ProductCategory::class, 'id', 'productType');
+    }
 }

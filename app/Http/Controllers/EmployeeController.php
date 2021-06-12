@@ -32,7 +32,6 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request->password . ' ' . $request->password_confirmation;
         $validator = Validator::make($request->only(['name', 'email', 'password', 'avatar', 'locations', 'password_confirmation']), [
             'name' => ['required', 'string', 'max:128'],
             'email' => ['required', 'email', 'max:128'],
@@ -155,6 +154,7 @@ class EmployeeController extends Controller
                 'locations' => $request->locations,
             ]);
 
+
             $response = [
                 'status' => Response::HTTP_OK,
                 'messages' => 'Success updating ' . $employee->name
@@ -164,7 +164,7 @@ class EmployeeController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => Response::HTTP_INTERNAL_SERVER_ERROR,
-                'messages' => 'failed to update, because : ' . $th->getMessage()
+                'messages' => 'Failed to update, because : ' . $th->getMessage()
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
